@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 
 public class Visitor{
-
     private String firstName;
     private String lastName;
     private int age;
     private double balance;
     private ArrayList<Car> carsOwned;
 
-    public Visitor(String firstName, String lastName, int age, double balance){
+    public Visitor(String firstName, String lastName, int age, double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -16,12 +15,12 @@ public class Visitor{
         this.carsOwned = new ArrayList<Car>();
     }
 
-    public void buy(Car car){
+    public void buy(Car car) {
         balance -= car.getPrice();
         carsOwned.add(car);
     }
 
-    public void sell(Car car){
+    public void sell(Car car) {
         balance += car.getPrice();
         carsOwned.remove(car);
     }
