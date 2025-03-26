@@ -35,5 +35,6 @@ public class Main {
             customer = true;
             System.out.println("Let's get started! As a customer, you can buy and sell the cars in your inventory. You currently have $500000 in your balance. Please select two cars to own for thi game:");
         }
+        //ldkflsjflkj
     }
 }
