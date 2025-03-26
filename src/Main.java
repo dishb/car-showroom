@@ -18,7 +18,7 @@ public class Main {
                                     };
         ArrayList<Car> allCars = new ArrayList<Car>();
         for (Object[] row : carData) {
-            Car car = new Car(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15]);
+            Car car = new Car(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
         }
 
     Scanner in = new Scanner(System.in);
@@ -29,12 +29,12 @@ public class Main {
         if (userResp1.equals("businessman")) {
             businessman = true;
             System.out.println("Let's get started! As a businessman, you can buy and sell the cars in your inventory. You currently have $100000 in your balance, as well as the following cars:");
+            
         }
 
         if (userResp1.equals("customer")) {
             customer = true;
-            System.out.println("Let's get started! As a customer, you can buy and sell the cars in your inventory. You currently have $500000 in your balance. Please select two cars to own for thi game:");
+            System.out.println("Let's get started! As a customer, you can buy and sell the cars in your inventory. You currently have $500000 in your balance. Please select two cars to own for this game:");
         }
-        //ldkflsjflkj
     }
 }
