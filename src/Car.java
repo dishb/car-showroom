@@ -15,37 +15,37 @@ public class Car {
     private String name;
     private boolean isEngineOn;
 
-    public Car(boolean isACOn,
-               boolean isRadioOn,
-               boolean areHeadlightsOn,
-               int currentSpeed,
-               String licensePlate,
-               int year,
-               String model,
-               String make,
-               boolean isUsed,
-               boolean isElectric,
-               double price,
-               String color,
-               int topSpeed,
-               String name,
-               boolean isEngineOn
+    public Car(Object isACOn,
+               Object isRadioOn,
+               Object areHeadlightsOn,
+               Object currentSpeed,
+               Object licensePlate,
+               Object year,
+               Object model,
+               Object make,
+               Object isUsed,
+               Object isElectric,
+               Object price,
+               Object color,
+               Object topSpeed,
+               Object name,
+               Object isEngineOn
                ) {
-        this.isACOn = isACOn;
-        this.isRadioOn = isRadioOn;
-        this.areHeadlightsOn = areHeadlightsOn;
-        this.currentSpeed = currentSpeed;
-        this.licensePlate = licensePlate;
-        this.year = year;
-        this.model = model;
-        this.make = make;
-        this.isUsed = isUsed;
-        this.isElectric = isElectric;
-        this.price = price;
-        this.color = color;
-        this.topSpeed = topSpeed;
-        this.name = name;
-        this.isEngineOn = isEngineOn;
+        this.isACOn = (boolean) isACOn;
+        this.isRadioOn = (boolean) isRadioOn;
+        this.areHeadlightsOn = (boolean) areHeadlightsOn;
+        this.currentSpeed = (int) currentSpeed;
+        this.licensePlate = String.valueOf(licensePlate);
+        this.year = (int) year;
+        this.model = String.valueOf(model);
+        this.make = String.valueOf(make);
+        this.isUsed = (boolean) isUsed;
+        this.isElectric = (boolean) isElectric;
+        this.price = (int) price;
+        this.color = String.valueOf(color);
+        this.topSpeed = (int) topSpeed;
+        this.name = String.valueOf(name);
+        this.isEngineOn = (boolean) isEngineOn;
     }
 
     public void toggleHeadlights() {
