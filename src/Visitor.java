@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Visitor{
+public class Visitor {
     private String firstName;
     private String lastName;
     private int age;
