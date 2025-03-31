@@ -10,31 +10,64 @@ public class Main {
                                     {false, false, false, 0, "LICENSE PLATE", 2024, "Land Cruiser", "Toyota", false, false, 55950.00, "Meteoor Shower", 109, "Land Cruiser", false},
                                     {false, false, false, 0, "LICENSE PLATE", 2024, "GTS", "McLaren", false, false, 219400.00, "Onyx Black", 203, "GTS", false},
                                     {false, false, false, 0, "LICENSE PLATE", 2024, "Spyder", "Lamborghini", false, false, 302939.00, "Verde Selvans", 202, "Spyder", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2019, "Huracán", "Lamborghini", false, false, 348773.00, "Verde Selvans", 199, "Huracán", false},
+                                    {false, false, false, 0, "SPDB548", 2019, "Huracán", "Lamborghini", false, false, 348773.00, "Verde Selvans", 199, "Huracán", false},
                                     {false, false, true, 0, "LICENSE PLATE", 2024, "i4", "BMW", false, false, 52800.00, "Alpine White", 130, "i4", false},
                                     {false, false, true, 0, "LICENSE PLATE", 2018, "M4 Coupe", "BMW", false, false, 80100.00, "Phytonic Blue Metallic", 155, "M4 Coupe", false},
                                     {false, false, false, 0, "LICENSE PLATE", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
                                     {false, false, false, 0, "LICENSE PLATE", 2025, "G-Wagon", "Mercedes", false, false, 150000.00, "Emerald Green Metallic", 137, "G-Wagon", false},
                                     };
         ArrayList<Car> allCars = new ArrayList<Car>();
+        Car car = null;
         for (Object[] row : carData) {
-            Car car = new Car(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            if (row[7].equals("BMW")) {
+                car = new BMW(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            } else if (row[7].equals("Lamborghini")) {
+                car = new Lamborghini(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            } else if (row[7].equals("McLaren")) {
+                car = new McLaren(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            } else if (row[7].equals("Mercedes")) {
+                car = new Mercedes(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            } else if (row[7].equals("Porsche")) {
+                car = new Porsche(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            } else if (row[7].equals("Toyota")) {
+                car = new Toyota(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14]);
+            }
+
+            allCars.add(car);
         }
 
-    Scanner in = new Scanner(System.in);
-    boolean businessman = false;
-    boolean customer = false;
-    System.out.println("Welcome to our Car Showroom Simulator. Would you like to play as the businessman or the customer today?");
-    String userResp1 = in.nextLine().toLowerCase();
+        for (Car temp : allCars) {
+            System.out.println(temp.toString());
+        }
+
+        Scanner in = new Scanner(System.in);
+        boolean businessman = false;
+        boolean customer = false;
+        System.out.println("Welcome to our Car Showroom Simulator. Would you like to play as the businessman or the customer today?");
+        String userResp1 = in.nextLine().toLowerCase();
         if (userResp1.equals("businessman")) {
+            customer = false;
             businessman = true;
-            System.out.println("Let's get started! As a businessman, you can buy and sell the cars in your inventory. You currently have $100000 in your balance, as well as the following cars:");
-            
-        }
-
-        if (userResp1.equals("customer")) {
+            System.out.println("Let's get started! As a businessman, you can buy and sell the cars in your inventory. You currently have $1,000,000 in your balance, as well as the following cars:");
+            for (int i = 0; i < allCars.size(); i++){
+                System.out.println(" - "+ allCars.get(i).getMake() + " " + allCars.get(i).getModel() + ": $" + allCars.get(i).getPrice());
+            }
+        } else if (userResp1.equals("customer")) {
             customer = true;
-            System.out.println("Let's get started! As a customer, you can buy and sell the cars in your inventory. You currently have $500000 in your balance. Please select two cars to own for this game:");
+            businessman = false;
+            System.out.println("Let's get started! As a customer, you can buy and sell the cars in your inventory. You currently have $500,000 in your balance. Please select the number of two cars to own for this game from the list below:");
+            for (int i = 0; i < allCars.size(); i++){
+                System.out.println((i + 1 ) + ". " + allCars.get(i).getMake() + " " + allCars.get(i).getModel());
+            }
+            int chooseFirstCar = in.nextInt();
+            int firstCarOwned = 0;
+            int secondCarOwned = 0;
+            for (int i = 0; i < allCars.size(); i++){
+                if (chooseFirstCar == i+1){
+                    System.out.println("Your first car owned is " + allCars.get(i).getMake() + " " + allCars.get(i).getModel() + ": $" + allCars.get(i).getPrice());
+                    firstCarOwned = i;
+                }
+            }
         }
     }
 }

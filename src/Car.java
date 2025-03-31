@@ -41,11 +41,15 @@ public class Car {
         this.make = String.valueOf(make);
         this.isUsed = (boolean) isUsed;
         this.isElectric = (boolean) isElectric;
-        this.price = (int) price;
+        this.price = (double) price;
         this.color = String.valueOf(color);
         this.topSpeed = (int) topSpeed;
         this.name = String.valueOf(name);
         this.isEngineOn = (boolean) isEngineOn;
+    }
+
+    public String toString() {
+        return "This is a " +  make + " " + model + " " + year + " in " + color + " with a top speed of " + topSpeed + " mph.";
     }
 
     public void toggleHeadlights() {
