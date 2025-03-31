@@ -49,7 +49,7 @@ public class Car {
     }
 
     public String toString() {
-        return "This is a " +  make + " " + model + " " + year + " in " + color + " with a top speed of " + topSpeed + " mph.";
+        return make + " " + model + " " + year;
     }
 
     public void toggleHeadlights() {
