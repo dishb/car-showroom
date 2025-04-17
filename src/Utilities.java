@@ -7,7 +7,10 @@ public class Utilities {
         List<String> possibleList = Arrays.asList(possible);
         String userResponse = "";
 
-        while (possibleList.contains(userResponse)) {
+        System.out.println(prompt + " ");
+        userResponse = in.nextLine().toLowerCase();
+
+        while (!possibleList.contains(userResponse)) {
             System.out.println("Invalid input. Please try again.");
             userResponse = in.nextLine().toLowerCase();
         }
@@ -19,7 +22,10 @@ public class Utilities {
         List<Integer> possibleList = Arrays.asList(possible);
         int userResponse = -1;
 
-        while (possibleList.contains(userResponse)) {
+        System.out.println(prompt + " ");
+        userResponse = in.nextInt();
+
+        while (!possibleList.contains(userResponse)) {
             System.out.println("Invalid input. Please try again.");
             userResponse = in.nextInt();
         }

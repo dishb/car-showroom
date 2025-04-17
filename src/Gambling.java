@@ -8,15 +8,15 @@ public class Gambling {
         if (spin == 1) {
             return "jackpot";
         } else if (1 < spin && spin <= 101) {
-            return "10000";
+            return "10000.00";
         } else if (101 < spin && spin <= 201) {
-            return "20000";
+            return "20000.00";
         } else if (201 < spin && spin <= 401) {
-            return "7000";
+            return "7000.00";
         } else if (401 < spin && spin <= 901) {
-            return "5000";
+            return "12000.00";
         } else {
-            return "12000";
+            return "5000.00";
         }
     }
 }
