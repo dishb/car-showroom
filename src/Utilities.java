@@ -10,6 +10,10 @@ public class Utilities {
         System.out.println(prompt + " ");
         userResponse = in.nextLine().toLowerCase();
 
+        if (userResponse.equals("quit")) {
+            System.exit(0);
+        }
+
         if (possibleList.size() != 0) {
             while (!possibleList.contains(userResponse)) {
                 System.out.println("Invalid input. Please try again.");

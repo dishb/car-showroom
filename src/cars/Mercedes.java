@@ -1,3 +1,4 @@
+package cars;
 public class Mercedes extends Car {
     public Mercedes(Object isACOn,
                     Object isRadioOn,

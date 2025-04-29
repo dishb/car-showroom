@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import cars.BMW;
+import cars.Car;
+import cars.Lamborghini;
+import cars.McLaren;
+import cars.Mercedes;
+import cars.Porsche;
+import cars.Toyota;
+
 public class App {
     public static void main(String[] args) {
         final Object[][] carData = {{false, false, false, 0, "NONITRO", 2025, "GR Supra", "Toyota", false, false, 56250.00, "Renaissance Red 2.0", 155, "Supra", false},
@@ -40,7 +48,7 @@ public class App {
         boolean businessman = false;
         boolean customer = false;
         Scanner in = new Scanner(System.in);
-        String userResponse = Utilities.getStringInput("\nWelcome to our Car Showroom Simulator. Would you like to play as the businessman or the customer today? (businessman / customer)",
+        String userResponse = Utilities.getStringInput("\nWelcome to our Car Showroom Simulator. Type \"quit\" at any time to quit the simulation. Would you like to play as the businessman or the customer today? (businessman / customer)",
                                                        new String[] {"businessman", "customer"}, in
                                                        );
 

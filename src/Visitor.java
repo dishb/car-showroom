@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import cars.Car;
+
 public class Visitor {
     private String firstName;
     private String lastName;

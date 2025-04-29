@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import cars.Car;
+
 public class Showroom {
     private boolean isLuxury;
     private String name;

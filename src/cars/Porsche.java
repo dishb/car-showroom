@@ -1,5 +1,6 @@
-public class McLaren extends Car {
-    public McLaren(Object isACOn,
+package cars;
+public class Porsche extends Car {
+    public Porsche(Object isACOn,
                    Object isRadioOn,
                    Object areHeadlightsOn,
                    Object currentSpeed,
@@ -32,15 +33,8 @@ public class McLaren extends Car {
               );
     }
 
-    public void slowDown() throws Exception {
-        throw new Exception("Cannot slow down in a McLaren.");
-    }
-
-    public void lookAtMe() {
-        System.out.println("Look at me! I love showing off and I own a expensive McLaren!");
-    }
-
-    public void butterFlyDoors() {
-        System.out.println("Opening my large and flashy butterfly doors.");
+    public void repair() {
+        int randInt = (int) (Math.random() * 40000) + 10000;
+        System.out.println("The repair cost will be " + randInt + ".00 dollars."); 
     }
 }

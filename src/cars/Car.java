@@ -1,3 +1,4 @@
+package cars;
 public class Car {
     private boolean isACOn;
     private boolean isRadioOn;
