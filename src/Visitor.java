@@ -15,6 +15,10 @@ public class Visitor {
         this.carsOwned = new ArrayList<Car>();
     }
 
+    public void addCar(Car car) {
+        carsOwned.add(car);
+    }
+
     public void buy(Car car) {
         balance -= car.getPrice();
         carsOwned.add(car);

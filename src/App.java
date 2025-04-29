@@ -3,18 +3,18 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        final Object[][] carData = {{false, false, false, 0, "LICENSE PLATE", 2025, "GR Supra", "Toyota", false, false, 56250.00, "Renaissance Red 2.0", 155, "Supra", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2025, "750S", "McLaren", false, false, 312585.00, "Ventura Orange", 206, "750S", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2026, "911 Carrera", "Porsche", false, false, 132930.00, "Oak Green Metallic Neo", 183, "911 Carrera", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2026, "Cayenne", "Porsche", false, false, 91890.00, "Montego Blue Metallic", 154, "Cayenne", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2024, "Land Cruiser", "Toyota", false, false, 55950.00, "Meteoor Shower", 109, "Land Cruiser", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2024, "GTS", "McLaren", false, false, 219400.00, "Onyx Black", 203, "GTS", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2024, "Spyder", "Lamborghini", false, false, 302939.00, "Verde Selvans", 202, "Spyder", false},
+        final Object[][] carData = {{false, false, false, 0, "NONITRO", 2025, "GR Supra", "Toyota", false, false, 56250.00, "Renaissance Red 2.0", 155, "Supra", false},
+                                    {false, false, false, 0, "U BROKI", 2025, "750S", "McLaren", false, false, 312585.00, "Ventura Orange", 206, "750S", false},
+                                    {false, false, false, 0, "NINE 11", 2026, "911 Carrera", "Porsche", false, false, 132930.00, "Oak Green Metallic Neo", 183, "911 Carrera", false},
+                                    {false, false, false, 0, "FAM$CAR", 2026, "Cayenne", "Porsche", false, false, 91890.00, "Montego Blue Metallic", 154, "Cayenne", false},
+                                    {false, false, false, 0, "FAM CAR", 2024, "Land Cruiser", "Toyota", false, false, 55950.00, "Meteoor Shower", 109, "Land Cruiser", false},
+                                    {false, false, false, 0, "GT58MCL", 2024, "GTS", "McLaren", false, false, 219400.00, "Onyx Black", 203, "GTS", false},
+                                    {false, false, false, 0, "MORALES", 2024, "Spyder", "Lamborghini", false, false, 302939.00, "Verde Selvans", 202, "Spyder", false},
                                     {false, false, false, 0, "JACKPOT", 2019, "Huracán", "Lamborghini", false, false, 348773.00, "Verde Selvans", 199, "Huracán", false},
-                                    {false, false, true, 0, "LICENSE PLATE", 2024, "i4", "BMW", false, false, 52800.00, "Alpine White", 130, "i4", false},
-                                    {false, false, true, 0, "LICENSE PLATE", 2018, "M4 Coupe", "BMW", false, false, 80100.00, "Phytonic Blue Metallic", 155, "M4 Coupe", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
-                                    {false, false, false, 0, "LICENSE PLATE", 2025, "G-Wagon", "Mercedes", false, false, 150000.00, "Emerald Green Metallic", 137, "G-Wagon", false},
+                                    {false, false, true, 0, "ELECTRI", 2024, "i4", "BMW", false, false, 52800.00, "Alpine White", 130, "i4", false},
+                                    {false, false, true, 0, "NOTURN1", 2018, "M4 Coupe", "BMW", false, false, 80100.00, "Phytonic Blue Metallic", 155, "M4 Coupe", false},
+                                    {false, false, false, 0, "DUBAI$$", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
+                                    {false, false, false, 0, "THEHULK", 2025, "G-Wagon", "Mercedes", false, false, 150000.00, "Emerald Green Metallic", 137, "G-Wagon", false},
                                     };
         ArrayList<Car> allCars = new ArrayList<Car>();
         Car car = null;
@@ -40,10 +40,10 @@ public class App {
         boolean businessman = false;
         boolean customer = false;
         Scanner in = new Scanner(System.in);
-        ArrayList<Car> inventory = new ArrayList<Car>();
         String userResponse = Utilities.getStringInput("\nWelcome to our Car Showroom Simulator. Would you like to play as the businessman or the customer today? (businessman / customer)",
                                                        new String[] {"businessman", "customer"}, in
                                                        );
+
         if (userResponse.equals("businessman")) {
             customer = false;
             businessman = true;
@@ -99,7 +99,7 @@ public class App {
                     if (userResponse.equals(Integer.toString(i))) {
                         showroom.sell(showroom.getCars().get(i).getName());
                         System.out.println("You sold " + showroom.getCars().get(i).toString() + ": " + showroom.getCars().get(i).getPrice());
-                        System.out.println("Congratulations! Your new balance is: $" + balance);
+                        System.out.println("Congratulations! Your new balance is: $" + showroom.getBalance());
                         break;
                     }
                 }
@@ -115,7 +115,7 @@ public class App {
                     showroom.addCar(allCars.get(8));
                 } else {
                     System.out.println("Congratulations, you won $" + prize + "!");
-                    balance += Double.parseDouble(prize);
+                    showroom.setBalance(showroom.getBalance() + Double.parseDouble(prize));
                 }
             }
 
@@ -123,7 +123,7 @@ public class App {
                                                     new String[] {"yes", "no"}, in
                                                     );
             if (userResponse.equals("yes")) {
-                if (balance > 10000) {
+                if (showroom.getBalance() > 10000) {
                     showroom.upgradeLevel();
                 } else {
                     System.out.println("Error, insufficient funds.");
@@ -134,28 +134,20 @@ public class App {
             customer = true;
             businessman = false;
             roleSelected = true;
-            double balance = 500000.00;
 
-            System.out.println("What is your first name?");
-            String[] blankFirstName = new String[0];
-            userResponse = Utilities.getStringInput("", blankFirstName, in);
-            String firstName = userResponse;
+            String firstName = Utilities.getStringInput("What is your first name?",
+                                                        new String[] {}, in
+                                                        );
             
-            System.out.println("What is your last name?");
-            String[] blankLastName = new String[0];
-            userResponse = Utilities.getStringInput("", blankLastName, in);
-            String lastName = userResponse;
+            String lastName = Utilities.getStringInput("What is your last name?",
+                                                       new String[] {}, in
+                                                       );
             
-            System.out.println("How old are you?");
-            Integer[] blankAge = new Integer[0];
-            int chooseAge = Utilities.getIntInput("", blankAge, in);
-            int age = chooseAge;
+            int age = Utilities.getIntInput("How old are you?",
+                                            new Integer[] {}, in
+                                            );
             
-            Visitor player = new Visitor(firstName, lastName, age, balance);
-            firstName = "";
-            lastName = "";
-            age = 0;
-            balance = 500000;
+            Visitor player = new Visitor(firstName, lastName, age, 500000.00);
 
             System.out.println("Let's get started, " + player.getFirstName() + " " + player.getLastName() + "! As a customer, you can buy and sell the cars in your inventory. You currently have $500,000 in your balance. First, you'll have to buy a car to start the game. Please select a car to own for this game from the list below:");
             for (int i = 0; i < allCars.size(); i++) {
@@ -168,11 +160,9 @@ public class App {
             }
 
             int chooseCar = Utilities.getIntInput("", possibleCars, in);
-            int numCarsOwned = 0;
             for (int i = 0; i < allCars.size(); i++) {
                 if (chooseCar - 1 == i){
                     System.out.println("You selected " + allCars.get(i).toString() + ": $" + allCars.get(i).getPrice() + ".");
-                    numCarsOwned = i;
                     break;
                 }
             }
@@ -181,25 +171,21 @@ public class App {
                                                     new String[] {"yes", "no"}, in
                                                     );
             if (userResponse.equals("yes")) {
-                numCarsOwned++;
-                balance -= allCars.get(chooseCar - 1).getPrice();
-                inventory.add(allCars.get(chooseCar - 1));
-                System.out.println("You now own " + numCarsOwned + " car(s).");
+                player.buy(allCars.get(chooseCar - 1));
+                System.out.println("You now own " + player.getCarsOwned().size() + " car(s).");
             }
 
             userResponse = Utilities.getStringInput("Do you want to spin the Wheel of Fortune? (yes / no)",
                                                     new String[] {"yes", "no"}, in
                                                     );
-            //make sure user doesn't lose money if they win
             if (userResponse.equals("yes")) {
                 String prize = Gambling.spinWheel();
                 if (prize.equals("jackpot")) {
                     System.out.println("Congratulations, you won the jackpot: a brand new Lamborghini Huracán!");
-                    inventory.add(allCars.get(8));
-                    numCarsOwned++;
+                    player.addCar(allCars.get(8));
                 } else {
                     System.out.println("Congratulations, you won $" + prize + "!");
-                    balance += Double.parseDouble(prize);
+                    player.setBalance(player.getBalance() + Double.parseDouble(prize));
                 }
             }
 
@@ -208,13 +194,13 @@ public class App {
                                                     );
             if (userResponse.equals("yes")) {
                 System.out.println("Which car would you like to sell? You can sell one of the following cars:");
-                for (int i = 0; i < allCars.size(); i++) {
-                    System.out.println((i + 1 ) + ". " + allCars.get(i).toString() + ": " + allCars.get(i).getPrice());
+                for (int i = 0; i < player.getCarsOwned().size(); i++) {
+                    System.out.println((i + 1 ) + ". " + player.getCarsOwned().get(i).toString() + ": " + player.getCarsOwned().get(i).getPrice());
                 }
                 
-                String[] carOptions = new String[allCars.size()];
-                for (int i = 0; i < allCars.size(); i++) {
-                    carOptions[i] = String.valueOf(allCars.get(i));
+                String[] carOptions = new String[player.getCarsOwned().size()];
+                for (int i = 0; i < player.getCarsOwned().size(); i++) {
+                    carOptions[i] = String.valueOf(player.getCarsOwned().get(i));
                 }
 
                 System.out.println("Choose the number of the car that you would like to sell");
@@ -224,11 +210,10 @@ public class App {
                                                         );
                 for (int i = 0; i < carOptions.length; i++) {
                     if (userResponse.equals(Integer.toString(i))) {
-                        System.out.println("You sold " + allCars.get(i).toString() + ": " + allCars.get(i).getPrice());
-                        balance += allCars.get(i).getPrice();
-                        numCarsOwned--;
-                        System.out.println("Congratulations! Your new balance is: $" + balance);
-                        System.out.println("You now own " + numCarsOwned + "car(s).");
+                        System.out.println("You sold " + player.getCarsOwned().get(i).toString() + ": " + player.getCarsOwned().get(i).getPrice());
+                        player.sell(player.getCarsOwned().get(i));
+                        System.out.println("Congratulations! Your new balance is: $" + player.getBalance());
+                        System.out.println("You now own " + player.getCarsOwned().size() + "car(s).");
                         break;
                     }
                 }
