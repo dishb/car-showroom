@@ -7,22 +7,39 @@ public class Showroom {
     private String state;
     private String country;
     private int numRooms;
-    private String currentRoom;
-    private String[] rooms;
     private ArrayList<Car> cars;
-    private int balance;
+    private double balance;
+    private int showroomLevel;
 
-    public Showroom(boolean isLuxury, String name, String city, String state, String country, int numRooms, String currentRoom, String[] rooms, int balance) {
+    public Showroom(boolean isLuxury,
+                    String name,
+                    String city,
+                    String state,
+                    String country,
+                    int numRooms,
+                    double balance,
+                    int showroomLevel
+                    ) {
         this.isLuxury = isLuxury;
         this.name = name;
         this.city = city;
         this.state = state;
         this.country = country;
         this.numRooms = numRooms;
-        this.currentRoom = currentRoom;
-        this.rooms = rooms;
         this.cars = new ArrayList<Car>();
-        this.balance = 0;
+        this.balance = balance;
+        this.showroomLevel = showroomLevel;
+    }
+
+    public void addCar(Car car) {
+        cars.add(car);
+    }
+
+    public void upgradeLevel() {
+        balance -= 10000;
+        for (Car car : cars) {
+            car.setPrice(car.getPrice() + 500.00);
+        }
     }
 
     public Car sell(String name) {
@@ -89,22 +106,6 @@ public class Showroom {
         this.numRooms = numRooms;
     }
 
-    public String getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(String currentRoom) {
-        this.currentRoom = currentRoom;
-    }
-
-    public String[] getRooms() {
-        return rooms;
-    }
-
-    public void setRooms(String[] rooms) {
-        this.rooms = rooms;
-    }
-
     public ArrayList<Car> getCars() {
         return cars;
     }
@@ -113,11 +114,19 @@ public class Showroom {
         this.cars = cars;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public int getShowroomLevel() {
+        return showroomLevel;
+    }
+
+    public void setShowroomLevel(int showroomLevel) {
+        this.showroomLevel = showroomLevel;
     }
 }

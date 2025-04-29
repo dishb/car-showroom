@@ -10,9 +10,11 @@ public class Utilities {
         System.out.println(prompt + " ");
         userResponse = in.nextLine().toLowerCase();
 
-        while (!possibleList.contains(userResponse)) {
-            System.out.println("Invalid input. Please try again.");
-            userResponse = in.nextLine().toLowerCase();
+        if (possibleList.size() != 0) {
+            while (!possibleList.contains(userResponse)) {
+                System.out.println("Invalid input. Please try again.");
+                userResponse = in.nextLine().toLowerCase();
+            }
         }
 
         return userResponse;
@@ -25,9 +27,11 @@ public class Utilities {
         System.out.println(prompt + " ");
         userResponse = in.nextInt();
 
-        while (!possibleList.contains(userResponse)) {
-            System.out.println("Invalid input. Please try again.");
-            userResponse = in.nextInt();
+        if (possibleList.size() != 0) {
+            while (!possibleList.contains(userResponse)) {
+                System.out.println("Invalid input. Please try again.");
+                userResponse = in.nextInt();
+            }
         }
 
         return userResponse;
