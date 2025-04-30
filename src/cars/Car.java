@@ -1,4 +1,5 @@
 package cars;
+
 public class Car {
     private boolean isACOn;
     private boolean isRadioOn;
@@ -55,30 +56,33 @@ public class Car {
 
     public void toggleHeadlights() {
         areHeadlightsOn = !areHeadlightsOn;
+        if (areHeadlightsOn) {
+            System.out.println("The road is now illuminated!");
+        }
     }
 
     public void toggleAC() {
         isACOn = !isACOn;
+        if (isACOn) {
+            System.out.println("Brr, it's getting colder in here.");
+        }
     }
 
     public void toggleRadio() {
         isRadioOn = !isRadioOn;
+        if (isRadioOn) {
+            System.out.println("Now playing " + Songs.getRandomSong() + ".");
+        }
     }
 
     public void accelerate() {
         currentSpeed += 1;
+        System.out.println("The driver hit the gas pedal, the car's current speed is " + currentSpeed + " mph.");
     }
 
     public void brake() {
         currentSpeed -= 1;
-    }
-
-    public void startCar() {
-        currentSpeed = 0;
-    }
-
-    public void stopCar() {
-        currentSpeed = 0;
+        System.out.println("The driver hit the brakes, the car's current speed is " + currentSpeed + " mph.");
     }
 
     public void drive() {
