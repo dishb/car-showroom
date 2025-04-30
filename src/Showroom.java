@@ -42,6 +42,8 @@ public class Showroom {
         for (Car car : cars) {
             car.setPrice(car.getPrice() + 500.00);
         }
+        
+        showroomLevel++;
     }
 
     public Car sell(String name) {
