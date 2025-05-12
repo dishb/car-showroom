@@ -34,13 +34,15 @@ public class Toyota extends Car {
     }
 
     @Override
-    public void setRadioOn(boolean isRadioOn) {
-        if (this.getYear() < 2020) {
-            System.out.println("This car is missing a radio");
+    public void toggleRadio() {
+        if (this.getYear() == 2025) {
+            System.out.println("I would rather use this car's radio manually, it's so hard to use the broken technology!");
+        } else {
+            super.toggleRadio();
         }
     }
 
-    public void breakdown() throws Exception{
+    public void breakdown() throws Exception {
         throw new Exception("This Toyota is too durable to break down.");
     }
 }

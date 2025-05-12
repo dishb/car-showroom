@@ -16,20 +16,21 @@ public class App {
                                     {false, false, false, 0, "NINE 11", 2026, "911 Carrera", "Porsche", false, false, 132930.00, "Oak Green Metallic Neo", 183, "911 Carrera", false},
                                     {false, false, false, 0, "FAM$CAR", 2026, "Cayenne", "Porsche", false, false, 91890.00, "Montego Blue Metallic", 154, "Cayenne", false},
                                     {false, false, false, 0, "FAM CAR", 2024, "Land Cruiser", "Toyota", false, false, 55950.00, "Meteor Shower", 109, "Land Cruiser", false},
-                                    {false, false, false, 0, "GT58MCL", 2024, "GTS", "McLaren", false, false, 219400.00, "Onyx Black", 203, "GTS", false},
+                                    {false, false, false, 0, "WILLRUN", 2024, "GTS", "McLaren", false, false, 219400.00, "Onyx Black", 203, "GTS", false},
                                     {false, false, false, 0, "MORALES", 2024, "Spyder", "Lamborghini", false, false, 302939.00, "Verde Selvans", 202, "Spyder", false},
                                     {false, false, false, 0, "JACKPOT", 2019, "Huracán", "Lamborghini", false, false, 348773.00, "Verde Selvans", 199, "Huracán", false},
                                     {false, false, true, 0, "ELECTRI", 2024, "i4", "BMW", false, false, 52800.00, "Alpine White", 130, "i4", false},
                                     {false, false, true, 0, "NOTURN0", 2018, "M4 Coupe", "BMW", false, false, 80100.00, "Phytonic Blue Metallic", 155, "M4 Coupe", false},
-                                    {false, false, false, 0, "DUBAI$$", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
+                                    {false, false, false, 0, "DUBAIII", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
                                     {false, false, false, 0, "THEHULK", 2025, "G-Wagon", "Mercedes", false, false, 150000.00, "Emerald Green Metallic", 137, "G-Wagon", false},
                                     };
-        final String[] carActions = {"toggleHeadlights",
-                                     "toggleAC",
-                                     "toggleRadio",
-                                     "accelerate",
-                                     "brake",
-                                     "drive"
+        final String[] carActions = {"Toggle headlights",
+                                     "Toggle AC",
+                                     "Toggle radio",
+                                     "Accelerate",
+                                     "Brake",
+                                     "Drive",
+                                     "See license plate"
                                      };
         ArrayList<Car> allCars = new ArrayList<Car>();
         Car car = null;
@@ -98,21 +99,21 @@ public class App {
                 } else if (firstAction.equals("sell")) {
                     System.out.println("Which car would you like to sell? You can sell one of the following cars:");
                     for (int i = 0; i < showroom.getCars().size(); i++) {
-                        System.out.println((i + 1 ) + ". " + showroom.getCars().get(i).toString() + ": " + showroom.getCars().get(i).getPrice());
+                        System.out.println(i + ". " + showroom.getCars().get(i).toString() + ": " + showroom.getCars().get(i).getPrice());
                     }
 
-                    String[] carOptions = new String[showroom.getCars().size()];
+                    Integer[] carOptions = new Integer[showroom.getCars().size()];
                     for (int i = 0; i < showroom.getCars().size(); i++) {
-                        carOptions[i] = String.valueOf(showroom.getCars().get(i));
+                        carOptions[i] = i;
                     }
 
                     System.out.println("Choose the number of the car that you would like to sell");
                     
-                    userResponse = Utilities.getStringInput("",
-                                                        carOptions, in
-                                                        );
+                    Integer chooseCar = Utilities.getIntInput("",
+                                                              carOptions, in
+                                                              );
                     for (int i = 0; i < carOptions.length; i++) {
-                        if (userResponse.equals(Integer.toString(i))) {
+                        if (chooseCar == i) {
                             showroom.sell(showroom.getCars().get(i).getName());
                             System.out.println("You sold " + showroom.getCars().get(i).toString() + ": " + showroom.getCars().get(i).getPrice());
                             System.out.println("Congratulations! Your new balance is: $" + showroom.getBalance());
@@ -169,17 +170,17 @@ public class App {
 
             System.out.println("Let's get started, " + player.getFirstName() + " " + player.getLastName() + "! As a customer, you can buy and sell the cars in your inventory. You currently have $500,000 in your balance. First, you'll have to buy a car to start the game. Please select a car to own for this game from the list below:");
             for (int i = 0; i < allCars.size(); i++) {
-                System.out.println((i + 1) + ". " + allCars.get(i).toString());
+                System.out.println((i) + ". " + allCars.get(i).toString());
             }
 
             Integer[] possibleCars = new Integer[allCars.size()];
             for (int i = 0; i < allCars.size(); i++) {
-                possibleCars[i] = i + 1;
+                possibleCars[i] = i;
             }
 
             int chooseCar = Utilities.getIntInput("", possibleCars, in);
             for (int i = 0; i < allCars.size(); i++) {
-                if (chooseCar - 1 == i){
+                if (chooseCar == i){
                     System.out.println("You selected " + allCars.get(i).toString() + ": $" + allCars.get(i).getPrice() + ".");
                     break;
                 }
@@ -189,7 +190,7 @@ public class App {
                                                     new String[] {"yes", "no"}, in
                                                     );
             if (userResponse.equals("yes")) {
-                player.buy(allCars.get(chooseCar - 1));
+                player.buy(allCars.remove(chooseCar));
                 System.out.println("You now own " + player.getCarsOwned().size() + " car(s).");
             }
 
@@ -200,25 +201,25 @@ public class App {
                 if (userResponse.equals("yes")) {
                     System.out.println("Which car would you like to buy? You can buy one of the following cars:");
                     for (int i = 0; i < allCars.size(); i++) {
-                        System.out.println((i + 1 ) + ". " + allCars.get(i).toString() + ": " + allCars.get(i).getPrice());
+                        System.out.println(i + ". " + allCars.get(i).toString() + ": $" + allCars.get(i).getPrice());
                     }
 
-                    String[] carOptions = new String[allCars.size()];
+                    Integer[] carOptions = new Integer[allCars.size()];
                     for (int i = 0; i < allCars.size(); i++) {
-                        carOptions[i] = String.valueOf(allCars.get(i));
+                        carOptions[i] = Integer.valueOf(i);
                     }
 
                     System.out.println("Choose the number of the car that you would like to buy:");
 
-                    userResponse = Utilities.getStringInput("",
-                                                            carOptions, in
-                                                            );
+                   chooseCar = Utilities.getIntInput("",
+                                                     carOptions, in
+                                                     );
                     for (int i = 0; i < carOptions.length; i++) {
-                        if (userResponse.equals(Integer.toString(i))) {
-                            player.buy(allCars.get(i));
+                        if (chooseCar == i) {
+                            player.buy(allCars.remove(i));
                             System.out.println("You bought " + allCars.get(i).toString() + ".");
                             System.out.println("Congratulations! Your new balance is: $" + player.getBalance());
-                            System.out.println("You now own " + player.getCarsOwned().size() + "car(s).");
+                            System.out.println("You now own " + player.getCarsOwned().size() + " car(s).");
                             break;
                         }
                     }
@@ -244,25 +245,25 @@ public class App {
                 if (userResponse.equals("yes")) {
                     System.out.println("Which car would you like to sell? You can sell one of the following cars:");
                     for (int i = 0; i < player.getCarsOwned().size(); i++) {
-                        System.out.println((i + 1 ) + ". " + player.getCarsOwned().get(i).toString() + ": " + player.getCarsOwned().get(i).getPrice());
+                        System.out.println(i + ". " + player.getCarsOwned().get(i).toString() + ": " + player.getCarsOwned().get(i).getPrice());
                     }
                     
-                    String[] carOptions = new String[player.getCarsOwned().size()];
+                    Integer[] carSellOptions = new Integer[player.getCarsOwned().size()];
                     for (int i = 0; i < player.getCarsOwned().size(); i++) {
-                        carOptions[i] = String.valueOf(player.getCarsOwned().get(i));
+                        carSellOptions[i] = Integer.valueOf(i);
                     }
 
                     System.out.println("Choose the number of the car that you would like to sell");
                     
-                    userResponse = Utilities.getStringInput("",
-                                                            carOptions, in
-                                                            );
-                    for (int i = 0; i < carOptions.length; i++) {
-                        if (userResponse.equals(Integer.toString(i))) {
+                    chooseCar = Utilities.getIntInput("",
+                                                      carSellOptions, in
+                                                      );
+                    for (int i = 0; i < carSellOptions.length; i++) {
+                        if (chooseCar == i) {
                             System.out.println("You sold " + player.getCarsOwned().get(i).toString() + ": " + player.getCarsOwned().get(i).getPrice());
                             player.sell(player.getCarsOwned().get(i));
                             System.out.println("Congratulations! Your new balance is: $" + player.getBalance());
-                            System.out.println("You now own " + player.getCarsOwned().size() + "car(s).");
+                            System.out.println("You now own " + player.getCarsOwned().size() + " car(s).");
                             break;
                         }
                     }
@@ -272,12 +273,12 @@ public class App {
                                                         new String[] {"yes", "no"}, in
                                                         );
                 if (userResponse.equals("yes")) {
-                    Integer[] numberCars = new Integer[carActions.length];
-                    Integer[] numberActions = new Integer[player.getCarsOwned().size()];
+                    Integer[] numberCars = new Integer[player.getCarsOwned().size()];
+                    Integer[] numberActions = new Integer[carActions.length];
 
                     System.out.println("Here are all of the cars you own:");
                     for (int i = 0; i < player.getCarsOwned().size(); i++) {
-                        System.out.println((i + 1) + ". " + player.getCarsOwned().get(i).toString());
+                        System.out.println(i + ". " + player.getCarsOwned().get(i).toString());
                         numberCars[i] = Integer.valueOf(i);
                     }
 
@@ -287,25 +288,27 @@ public class App {
                     
                     System.out.println("Here are all of the actions you can perform on a car.");
                     for (int i = 0; i < carActions.length; i++) {
-                        System.out.println((i + 1) + ". " + carActions[i]);
+                        System.out.println(i + ". " + carActions[i]);
                         numberActions[i] = Integer.valueOf(i);
                     }
-                    System.out.println("Or, choose the number " + (numberActions.length + 1) + " to run a special method (if available, otherwise the drive method is used).");
+                    System.out.println("Or, choose the number " + (numberActions.length - 1) + " to run a special method (if available, otherwise the drive method is used).");
 
                     int actionToPerform = Utilities.getIntInput("Enter the number of the action you want to perform on the selected car.",
                                                                 numberActions, in
                                                                 );
                     Car temp = player.getCarsOwned().get(carToActOn);
-                    if (actionToPerform == 1) {
+                    if (actionToPerform == 0) {
                         temp.toggleHeadlights();
-                    } else if (actionToPerform == 2) {
+                    } else if (actionToPerform == 1) {
                         temp.toggleAC();
-                    } else if (actionToPerform == 3) {
+                    } else if (actionToPerform == 2) {
                         temp.toggleRadio();
-                    } else if (actionToPerform == 4) {
+                    } else if (actionToPerform == 3) {
                         temp.accelerate();
-                    } else if (actionToPerform == 5) {
+                    } else if (actionToPerform == 4) {
                         temp.brake();
+                    } else if (actionToPerform == 5) {
+                        System.out.println("License plate: " + temp.getLicensePlate());
                     } else {
                         if (temp instanceof Toyota) {
                             ((Toyota) temp).breakdown();
