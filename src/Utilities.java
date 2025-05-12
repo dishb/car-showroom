@@ -29,12 +29,23 @@ public class Utilities {
         int userResponse = -1;
 
         System.out.println(prompt + " ");
-        userResponse = in.nextInt();
+        
+        try {
+            userResponse = in.nextInt();
+        } catch (java.util.InputMismatchException error) {
+            System.out.println("You must enter an integer.");
+            in.nextLine();
+        }
 
         if (possibleList.size() != 0) {
             while (!possibleList.contains(userResponse)) {
                 System.out.println("Invalid input. Please try again.");
-                userResponse = in.nextInt();
+                try {
+                    userResponse = in.nextInt();
+                } catch (java.util.InputMismatchException error) {
+                    System.out.println("You must enter an integer.");
+                    in.nextLine();
+                }
             }
         }
 

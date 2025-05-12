@@ -10,7 +10,7 @@ import cars.Porsche;
 import cars.Toyota;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         final Object[][] carData = {{false, false, false, 0, "NONITRO", 2025, "GR Supra", "Toyota", false, false, 56250.00, "Renaissance Red 2.0", 155, "Supra", false},
                                     {false, false, false, 0, "U BROKI", 2025, "750S", "McLaren", false, false, 312585.00, "Ventura Orange", 206, "750S", false},
                                     {false, false, false, 0, "NINE 11", 2026, "911 Carrera", "Porsche", false, false, 132930.00, "Oak Green Metallic Neo", 183, "911 Carrera", false},
@@ -24,6 +24,13 @@ public class App {
                                     {false, false, false, 0, "DUBAI$$", 2020, "G550", "Mercedes", false, false, 148250.00, "Obsidian Black Metallic", 130, "G550", false},
                                     {false, false, false, 0, "THEHULK", 2025, "G-Wagon", "Mercedes", false, false, 150000.00, "Emerald Green Metallic", 137, "G-Wagon", false},
                                     };
+        final String[] carActions = {"toggleHeadlights",
+                                     "toggleAC",
+                                     "toggleRadio",
+                                     "accelerate",
+                                     "brake",
+                                     "drive"
+                                     };
         ArrayList<Car> allCars = new ArrayList<Car>();
         Car car = null;
         for (Object[] row : carData) {
@@ -257,6 +264,63 @@ public class App {
                             System.out.println("Congratulations! Your new balance is: $" + player.getBalance());
                             System.out.println("You now own " + player.getCarsOwned().size() + "car(s).");
                             break;
+                        }
+                    }
+                }
+
+                userResponse = Utilities.getStringInput("Would you like to perform an action on any of your cars? (yes / no)",
+                                                        new String[] {"yes", "no"}, in
+                                                        );
+                if (userResponse.equals("yes")) {
+                    Integer[] numberCars = new Integer[carActions.length];
+                    Integer[] numberActions = new Integer[player.getCarsOwned().size()];
+
+                    System.out.println("Here are all of the cars you own:");
+                    for (int i = 0; i < player.getCarsOwned().size(); i++) {
+                        System.out.println((i + 1) + ". " + player.getCarsOwned().get(i).toString());
+                        numberCars[i] = Integer.valueOf(i);
+                    }
+
+                    int carToActOn = Utilities.getIntInput("Enter the number of the car you want to perform an action upon.",
+                                                           numberCars, in
+                                                           );
+                    
+                    System.out.println("Here are all of the actions you can perform on a car.");
+                    for (int i = 0; i < carActions.length; i++) {
+                        System.out.println((i + 1) + ". " + carActions[i]);
+                        numberActions[i] = Integer.valueOf(i);
+                    }
+                    System.out.println("Or, choose the number " + (numberActions.length + 1) + " to run a special method (if available, otherwise the drive method is used).");
+
+                    int actionToPerform = Utilities.getIntInput("Enter the number of the action you want to perform on the selected car.",
+                                                                numberActions, in
+                                                                );
+                    Car temp = player.getCarsOwned().get(carToActOn);
+                    if (actionToPerform == 1) {
+                        temp.toggleHeadlights();
+                    } else if (actionToPerform == 2) {
+                        temp.toggleAC();
+                    } else if (actionToPerform == 3) {
+                        temp.toggleRadio();
+                    } else if (actionToPerform == 4) {
+                        temp.accelerate();
+                    } else if (actionToPerform == 5) {
+                        temp.brake();
+                    } else {
+                        if (temp instanceof Toyota) {
+                            ((Toyota) temp).breakdown();
+                        } else if (temp instanceof Porsche) {
+                            ((Porsche) temp).repair();
+                        } else if (temp instanceof Mercedes) {
+                            ((Mercedes) temp).hateBMW();
+                        } else if (temp instanceof McLaren) {
+                            ((McLaren) temp).lookAtMe();
+                        } else if (temp instanceof Lamborghini) {
+                            ((Lamborghini) temp).revEngine();
+                        } else if (temp instanceof BMW) {
+                            ((BMW) temp).hateMercedes();
+                        } else {
+                            temp.drive();
                         }
                     }
                 }
