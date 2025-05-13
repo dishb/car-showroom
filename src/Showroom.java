@@ -33,6 +33,10 @@ public class Showroom {
         this.showroomLevel = showroomLevel;
     }
 
+    public void addMoney(double money) {
+        balance += money;
+    }
+
     public void addCar(Car car) {
         cars.add(car);
     }
@@ -47,14 +51,22 @@ public class Showroom {
     }
 
     public Car sell(String name) {
-        for (int i = 0; i < cars.size(); i++) {
-            if (cars.get(i).getName().equals(name)) {
-                balance += cars.get(i).getPrice();
-                return cars.remove(i);
+        int customerHappy = (int) (Math.random() * 3) + 1;
+        if (customerHappy == 1) {
+            for (int i = 0; i < cars.size(); i++) {
+                if (cars.get(i).getName().equals(name)) {
+                    balance += cars.get(i).getPrice();
+                    return cars.remove(i);
+                }
             }
         }
 
         return null;
+    }
+
+    public Car sell(int index) {
+        balance += cars.get(index).getPrice();
+        return cars.remove(index);
     }
 
     public void buy(Car car) {

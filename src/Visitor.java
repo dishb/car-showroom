@@ -17,6 +17,10 @@ public class Visitor {
         this.carsOwned = new ArrayList<Car>();
     }
 
+    public void addMoney(double money) {
+        balance += money;
+    }
+
     public void addCar(Car car) {
         carsOwned.add(car);
     }

@@ -11,6 +11,8 @@ fi
 
 cd "$(dirname "$0")"
 
+clear
+
 if [ ! -d "./bin" ]; then
     mkdir -p ./bin
 fi

@@ -7,7 +7,7 @@ public class Utilities {
         List<String> possibleList = Arrays.asList(possible);
         String userResponse = "";
 
-        System.out.println(prompt + " ");
+        System.out.println("\n" + prompt + "\n");
         userResponse = in.nextLine().toLowerCase();
 
         if (userResponse.equals("quit")) {
@@ -16,7 +16,7 @@ public class Utilities {
 
         if (possibleList.size() > 0) {
             while (!possibleList.contains(userResponse)) {
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("\nInvalid input. Please try again.\n");
                 userResponse = in.nextLine().toLowerCase();
             }
         }
@@ -28,13 +28,15 @@ public class Utilities {
         List<Integer> possibleList = Arrays.asList(possible);
         int userResponse = -1;
 
-        System.out.println(prompt + " ");
+        System.out.println("\n" + prompt + "\n");
         userResponse = in.nextInt();
+        in.nextLine();
 
         if (possibleList.size() > 0) {
             while (!possibleList.contains(userResponse)) {
-                System.out.println("Invalid input. Please try again.");
+                System.out.println("\nInvalid input. Please try again.\n");
                 userResponse = in.nextInt();
+                in.nextLine();
             }
         }
 
